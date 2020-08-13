@@ -65,9 +65,9 @@ export default class MathQuestionScene extends Phaser.Scene {
             secondFactor = this.currentCorrectAnswer - firstFactor;
         } else if(operation == "subtract") {
             symbol = "-";
-            firstFactor = getRandomIntInclusive(2, (window as any).maxResultSize);
-            secondFactor = getRandomIntInclusive(1, firstFactor - 1);
-            this.currentCorrectAnswer = firstFactor - secondFactor;
+            this.currentCorrectAnswer = getRandomIntInclusive(1, (window as any).maxResultSize);
+            secondFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
+            firstFactor = this.currentCorrectAnswer + secondFactor;
         } else if(operation == "multiply") {
             symbol = "*";
             var fc = factors(this.currentCorrectAnswer);

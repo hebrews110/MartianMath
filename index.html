@@ -61,14 +61,15 @@
         width: 100%;
         max-width: 100%;
         box-sizing: border-box;
-        font-size: 2rem;
+        font-size: 1.5rem;
         color: white;
         height: 100%;
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         flex-direction: column;
         padding: 1rem;
         align-items: center;
+        overflow: auto;
         z-index: 4;
       }
       #option-screen button, #option-screen input {
@@ -84,6 +85,9 @@
       }
       #option-screen h1 {
         color: white;
+        margin-top: 0;
+        font-size: 1.7em;
+        text-align: center;
       }
       #option-screen span {
         max-width: 40rem;
@@ -120,17 +124,24 @@
       <h1>Martian Math</h1>
       <span>Get the Martian through all the levels while practicing your math facts along the way!</span>
       <br/>
-      <span>To get started, choose a range of numbers you'd like the game to ask you questions for.
-      The minimum number is always 1. Enter the maximum number in this textbox.</span>
+      <span>To get started, choose a facts category.</span>
       <br/>
-      <input type="number" id="max-number" placeholder="Max number"></input>
+      <div style="text-align: left;">
+        <span>
+          <input type="radio" id="facts-to-5" name="fact_type" value="5" checked>
+          <label for="facts-to-5">Facts to 5</label>
+        </span>
+        <br/>
+        <span>
+          <input type="radio" id="facts-to-10" name="fact_type" value="10">
+          <label for="facts-to-10">Facts to 10</label>
+        </span>
+      </div>
       <br/>
       <span>Next, choose what math operation you'd like to work on.</span>
       <div class="option-buttons">
         <button onclick="window.onchoosefn(event)">Add</button>
         <button onclick="window.onchoosefn(event)">Subtract</button>
-        <button onclick="window.onchoosefn(event)">Multiply</button>
-        <button onclick="window.onchoosefn(event)">Divide</button>
       </div>
       <a href="https://freesound.org/people/MATRIXXX_/sounds/495541/">Sound credits</a>
     </div>
@@ -142,7 +153,8 @@
       // Create the event.
       window.onchoosefn = function(ev) {
         window.operation = ev.currentTarget.textContent.toLowerCase();
-        window.maxResultSize = parseInt(document.querySelector("#max-number").value);
+        window.maxResultSize = document.querySelector("#facts-to-10").checked ? 9 : 5;
+        console.log("Facts to", window.maxResultSize);
         var loadEvent = document.createEvent('Event');
 
         // Define that the event name is 'build'.
@@ -163,5 +175,5 @@
         })
       }
     </script>
-  <script type="text/javascript" src="vendors.4d3c0dc386825f9a53a6.js"></script><script type="text/javascript" src="game.9438e24597088e3d6e6a.js"></script></body>
+  <script type="text/javascript" src="vendors.4d3c0dc386825f9a53a6.js"></script><script type="text/javascript" src="game.aaacada5de906c003f0a.js"></script></body>
 </html>
