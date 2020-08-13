@@ -70,16 +70,9 @@ export default class MathQuestionScene extends Phaser.Scene {
             firstFactor = this.currentCorrectAnswer + secondFactor;
         } else if(operation == "multiply") {
             symbol = "*";
-            var fc = factors(this.currentCorrectAnswer);
-            var firstIndex = getRandomIntInclusive(0, (fc.length - 1) / 2);
-            var secondIndex = fc.length - 1 - firstIndex;
-            firstFactor = fc[firstIndex];
-            secondFactor = fc[secondIndex];
-            if(Math.random() < 0.5) {
-                var tmp = firstFactor;
-                firstFactor = secondFactor;
-                secondFactor = tmp;
-            }
+            firstFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
+            secondFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
+            this.currentCorrectAnswer = firstFactor * secondFactor;
         } else if(operation == "divide") {
             var divisor = getRandomIntInclusive(2, 6);
             firstFactor = this.currentCorrectAnswer * divisor;
