@@ -17,7 +17,7 @@ var createLabel = function (scene, text) {
       background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x5e92f3),
 
       text: scene.add.text(0, 0, text, {
-          fontSize: '24px'
+          fontSize: '40px'
       }),
 
       space: {
@@ -117,7 +117,7 @@ export default class MainScene extends Phaser.Scene {
         title: this.rexUI.add.label({
             background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
             text: this.add.text(0, 0, 'Question', {
-                fontSize: '24px'
+                fontSize: '60px'
             }),
             space: {
                 left: 15,
@@ -128,7 +128,7 @@ export default class MainScene extends Phaser.Scene {
         }),
   
         content: this.add.text(0, 0, 'Do you want to enter full screen mode?', {
-            fontSize: '24px'
+            fontSize: '40px'
         }),
   
         actions: [

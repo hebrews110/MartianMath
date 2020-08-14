@@ -4,7 +4,7 @@ var createLabel = function (scene, text) {
         background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x6a4f4b),
   
         text: scene.add.text(0, 0, text, {
-            fontSize: '24px'
+            fontSize: '40px'
         }),
   
         space: {
@@ -104,7 +104,7 @@ export default class MathQuestionScene extends Phaser.Scene {
             title: this.rexUI.add.label({
                 background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x1b0000),
                 text: this.add.text(0, 0, `Answer ${data.num} question${data.num == 1 ? '' : 's'} to continue...`, {
-                    fontSize: '24px'
+                    fontSize: '60px'
                 }),
                 space: {
                     left: 15,
@@ -115,7 +115,7 @@ export default class MathQuestionScene extends Phaser.Scene {
             }),
     
             content: this.add.text(0, 0, `${firstFactor} ${symbol} ${secondFactor} = ?`, {
-                fontSize: '24px'
+                fontSize: '40px'
             }),
     
             choices: columns.map(val => createLabel(this, val.toString())),
@@ -162,7 +162,7 @@ export default class MathQuestionScene extends Phaser.Scene {
                         title: this.rexUI.add.label({
                             background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
                             text: this.add.text(0, 0, 'Incorrect', {
-                                fontSize: '24px'
+                                fontSize: '60px'
                             }),
                             space: {
                                 left: 15,
@@ -173,7 +173,7 @@ export default class MathQuestionScene extends Phaser.Scene {
                         }),
             
                         content: this.add.text(0, 0, 'The correct answer was ' + this.currentCorrectAnswer + '.', {
-                            fontSize: '24px'
+                            fontSize: '40px'
                         }),
             
                         actions: [
