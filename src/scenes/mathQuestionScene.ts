@@ -69,7 +69,7 @@ export default class MathQuestionScene extends Phaser.Scene {
             secondFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
             firstFactor = this.currentCorrectAnswer + secondFactor;
         } else if(operation == "multiply") {
-            symbol = "*";
+            symbol = "×";
             firstFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
             secondFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
             this.currentCorrectAnswer = firstFactor * secondFactor;
