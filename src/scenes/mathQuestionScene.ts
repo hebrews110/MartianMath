@@ -1,4 +1,7 @@
 
+import Swal from 'sweetalert2';
+
+
 var createLabel = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x6a4f4b),
@@ -90,9 +93,23 @@ export default class MathQuestionScene extends Phaser.Scene {
             incorrectAnswers.push(value);
         }
         let columns: number[] = [];
+        let inputOptions = {};
         for(var i = 0; i < NUM_COLUMNS; i++) {
             columns[i] = i == correctInitialColumn ? this.currentCorrectAnswer : (incorrectAnswers.pop() as number)
+            inputOptions[columns[i].toString()] = columns[i].toString();
         }
+        
+        
+        Swal.fire({
+            title: `${firstFactor} ${symbol} ${secondFactor} = ?`,
+            text: `(${data.num-1} question${(data.num-1) == 1 ? '' : 's'} left to answer after this)`,
+            input: 'select',
+            inputOptions,
+
+        }).then(obj => {
+            this.events.emit("answer_click", { text: (obj as any).value.toString() });
+        })
+        /*
         var dialog = this.rexUI.add.dialog({
             anchor: {
                 centerX: 'center',
@@ -144,13 +161,14 @@ export default class MathQuestionScene extends Phaser.Scene {
         .on('button.out', function (button, groupName, index) {
             button.getElement('background').setStrokeStyle();
         });
+        */
     }
     async getQuestionAnswer(): Promise<boolean> {
         return new Promise(resolve => this.events.once('answer_click', async(button) => {
             let correct = parseInt(button.text) == this.currentCorrectAnswer;
             this.sound.play(`player_answers_${correct ? "correct" : "incorrect"}ly`);
             if(!correct) {
-                await new Promise(resolve => {
+                await new Promise<void>(resolve => {
                     var infoDialog = this.rexUI.add.dialog({
                         anchor: {
                             centerX: 'center',
@@ -185,10 +203,10 @@ export default class MathQuestionScene extends Phaser.Scene {
                             content: 25,
                             action: 15,
             
-                            left: 20,
-                            right: 20,
-                            top: 20,
-                            bottom: 20,
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10,
                         },
             
                         align: {
