@@ -156,6 +156,7 @@
       window.onchoosefn = function(ev) {
         window.operation = ev.currentTarget.textContent.toLowerCase();
         window.maxResultSize = document.querySelector("#facts-to-10").checked ? 9 : 5;
+        window.generateMathQuestions(window.operation, window.maxResultSize);
         console.log("Facts to", window.maxResultSize);
         var loadEvent = document.createEvent('Event');
 

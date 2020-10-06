@@ -4,7 +4,7 @@ import PreloadScene from './scenes/preloadScene'
 // @ts-ignore
 import SpineWebGLPlugin from './plugins/SpineWebGLPlugin'
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin';
-
+import './mathcore.js';
 type scaleMode = 'FIT' | 'SMOOTH'
 
 const DEFAULT_WIDTH: number = 1280

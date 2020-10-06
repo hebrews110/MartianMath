@@ -9,6 +9,7 @@ import Controls from '../components/controls/controls'
 import Background from '../components/background'
 import MiniMap from '../components/miniMap'
 import MathQuestionScene from './mathQuestionScene'
+
 var createLabel = function (scene, text) {
   return scene.rexUI.add.label({
       // width: 40,

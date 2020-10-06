@@ -1,7 +1,6 @@
 
 import Swal from 'sweetalert2';
 
-
 var createLabel = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x6a4f4b),
@@ -57,32 +56,15 @@ export default class MathQuestionScene extends Phaser.Scene {
         var operation = (window as any).operation;
         console.log(maxResultSize, operation);
         var correctInitialColumn = getRandomIntInclusive(0, NUM_COLUMNS - 1);
-        this.currentCorrectAnswer = getRandomIntInclusive(1, (window as any).maxResultSize);
+        /* MATH CORE BEGIN */
         var firstFactor, secondFactor, symbol;
-        if(operation != null)
-            operation = operation.trim();
+        var retrievedQuestion = (window as any).getNextMathQuestion();
+        firstFactor = retrievedQuestion.operands[0];
+        secondFactor = retrievedQuestion.operands[1];
+        symbol = (window as any).mathSymbol;
+        this.currentCorrectAnswer = retrievedQuestion.currentCorrectAnswer;
         
-        if(operation == "add") {
-            symbol = "+";
-            firstFactor = getRandomIntInclusive(1, this.currentCorrectAnswer);
-            secondFactor = this.currentCorrectAnswer - firstFactor;
-        } else if(operation == "subtract") {
-            symbol = "-";
-            this.currentCorrectAnswer = getRandomIntInclusive(1, (window as any).maxResultSize);
-            secondFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
-            firstFactor = this.currentCorrectAnswer + secondFactor;
-        } else if(operation == "multiply") {
-            symbol = "×";
-            firstFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
-            secondFactor = getRandomIntInclusive(1, (window as any).maxResultSize);
-            this.currentCorrectAnswer = firstFactor * secondFactor;
-        } else if(operation == "divide") {
-            var divisor = getRandomIntInclusive(2, 6);
-            firstFactor = this.currentCorrectAnswer * divisor;
-            secondFactor = divisor;
-            symbol = "/";
-        } else
-            window.alert("Unknown ?operation");
+        /* MATH CORE END */
         
         var incorrectAnswers: number[] = [];
         for(var i = 0; i < (NUM_COLUMNS-1); i++) {
