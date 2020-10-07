@@ -156,6 +156,7 @@
       window.onchoosefn = function(ev) {
         window.operation = ev.currentTarget.textContent.toLowerCase();
         window.maxResultSize = document.querySelector("#facts-to-10").checked ? 9 : 5;
+        window.generateMathQuestions(window.operation, window.maxResultSize);
         console.log("Facts to", window.maxResultSize);
         var loadEvent = document.createEvent('Event');
 
@@ -177,5 +178,5 @@
         })
       }
     </script>
-  <script type="text/javascript" src="vendors.b0c8bb357cb0657504cc.js"></script><script type="text/javascript" src="game.cde3551d16841d947c53.js"></script></body>
+  <script type="text/javascript" src="vendors.f4fab40f0c005de3179e.js"></script><script type="text/javascript" src="game.842ac72f8a0f218ec026.js"></script></body>
 </html>
