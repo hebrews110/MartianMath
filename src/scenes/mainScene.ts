@@ -165,6 +165,7 @@ export default class MainScene extends Phaser.Scene {
           button.getElement('background').setStrokeStyle();
       }).on('button.click', (button, groupName, index) => {
         if(button.text == "Yes") {
+          this.game.scale.fullscreenTarget = document.body;
           this.game.scale.startFullscreen();
           this.scale.updateBounds();
         }
