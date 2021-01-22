@@ -31,7 +31,7 @@ var createLabel = function (scene, text) {
 }
 
 
-var askFullscreen = false;
+var askFullscreen = true;
 
 let questionVisible = false;
 
@@ -186,7 +186,7 @@ export default class MainScene extends Phaser.Scene {
 
       if(enemy.getData("questionAsked") != "true" && !questionVisible) {
         questionVisible = true;
-        this.sound.play('player_attacks');
+        try { this.sound.play('player_attacks'); } catch(e) {}
         enemy.setData("questionAsked", "true");
         console.log("open question");
         const answerCorrect = await this.askQuestion(1);
@@ -218,7 +218,7 @@ export default class MainScene extends Phaser.Scene {
  
         if(successful) {
           player.halt()
-          this.sound.play('level_completes')
+          try { this.sound.play('level_completes'); } catch(e) {}
           goal.nextLevel(this, this.level)
         } else {
           player.kill()
