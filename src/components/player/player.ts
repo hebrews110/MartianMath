@@ -43,9 +43,9 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
 
   kill() {
     this._dead = true
-    this.scene.sound.play("player_dies", {
+    try { this.scene.sound.play("player_dies", {
       volume: 0.4
-    });
+    }); } catch(e) {}
     // animate the camera if the player dies
     this.scene.cameras.main.shake(500, 0.025)
     this.setVelocityY(600)
@@ -82,13 +82,13 @@ export default class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     if(this.notOnLand && this.body.blocked.down) {
-      this.scene.sound.play("player_lands")
+      try { this.scene.sound.play("player_lands")} catch(e) {}
       this.notOnLand = false
     }
     // controls up
     if ((cursors.up.isDown || cursors.space.isDown || controls.upIsDown) && this.body.blocked.down) {
       this.setVelocityY(-1250)
-      this.scene.sound.play('player_jumps')
+      try { this.scene.sound.play('player_jumps')} catch(e) {}
       this.notOnLand = true
     } else if(!this.notOnLand && !this.body.blocked.down) {
       this.notOnLand = true

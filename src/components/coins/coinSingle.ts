@@ -23,7 +23,7 @@ export default class CoinSingle extends Phaser.Physics.Arcade.Sprite {
   collect() {
     if (this.collecting) return
     this.collecting = true
-    this.scene.sound.play('player_collects');
+    try { this.scene.sound.play('player_collects');} catch(e){}
     this.scene.tweens.add({
       targets: this,
       alpha: 0,

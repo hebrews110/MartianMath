@@ -1,4 +1,5 @@
 
+import { ECANCELED } from 'constants';
 import Swal from 'sweetalert2';
 
 var createLabel = function (scene, text) {
@@ -82,15 +83,42 @@ export default class MathQuestionScene extends Phaser.Scene {
         }
         
         
-        Swal.fire({
-            title: `${firstFactor} ${symbol} ${secondFactor} = ?`,
-            text: `(${data.num-1} question${(data.num-1) == 1 ? '' : 's'} left to answer after this)`,
-            input: 'select',
-            inputOptions,
-
-        }).then(obj => {
-            this.events.emit("answer_click", { text: (obj as any).value.toString() });
-        })
+        if(window.innerHeight < 400) {
+            Swal.fire({
+                title: `${firstFactor} ${symbol} ${secondFactor} = ?`,
+                text: `(${data.num-1} question${(data.num-1) == 1 ? '' : 's'} left to answer after this)`,
+                input: 'select',
+                allowEnterKey: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                inputOptions,
+    
+            }).then(obj => {
+                this.events.emit("answer_click", { text: (obj as any).value.toString() });
+            })
+        } else {
+            Swal.fire({
+                title: `${firstFactor} ${symbol} ${secondFactor} = ?`,
+                text: `(${data.num-1} question${(data.num-1) == 1 ? '' : 's'} left to answer after this)`,
+                html: columns.sort((a, b) => a - b).map(i => '<button type="button" role="button" tabindex="-1" class="swal2-confirm swal2-question-choice swal2-styled">' + i.toString() + '</button>').join(''),
+                focusConfirm: false,
+                showConfirmButton: false,
+                allowEnterKey: false,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                customClass: {
+                    content: 'swal2-question-content'
+                },
+                onOpen: (element) => {
+                    element.querySelectorAll(".swal2-question-choice").forEach(button => button.addEventListener("click", (e) => {
+                        const button: HTMLButtonElement = e.currentTarget! as HTMLButtonElement;
+                        this.events.emit("answer_click", { text: button.textContent!.toString() });
+                        Swal.close();
+                    }));
+                }
+            });
+        }
+        
         /*
         var dialog = this.rexUI.add.dialog({
             anchor: {
@@ -148,7 +176,7 @@ export default class MathQuestionScene extends Phaser.Scene {
     async getQuestionAnswer(): Promise<boolean> {
         return new Promise(resolve => this.events.once('answer_click', async(button) => {
             let correct = parseInt(button.text) == this.currentCorrectAnswer;
-            this.sound.play(`player_answers_${correct ? "correct" : "incorrect"}ly`);
+            try { this.sound.play(`player_answers_${correct ? "correct" : "incorrect"}ly`); } catch(e) {}
             if(!correct) {
                 await new Promise<void>(resolve => {
                     var infoDialog = this.rexUI.add.dialog({
