@@ -161,7 +161,7 @@
       // Create the event.
       window.onchoosefn = function(ev) {
         window.operation = ev.currentTarget.textContent.toLowerCase();
-        window.maxResultSize = document.querySelector("#facts-to-10").checked ? 9 : 5;
+        window.maxResultSize = document.querySelector("#facts-to-10").checked ? 10 : 5;
         window.generateMathQuestions(window.operation, window.maxResultSize);
         console.log("Facts to", window.maxResultSize);
         var loadEvent = document.createEvent('Event');
@@ -184,5 +184,5 @@
         })
       }
     </script>
-  <script type="text/javascript" src="vendors.f4fab40f0c005de3179e.js"></script><script type="text/javascript" src="game.8cc74958ce3850c21069.js"></script></body>
+  <script type="text/javascript" src="vendors.f4fab40f0c005de3179e.js"></script><script type="text/javascript" src="game.06e3cce797a4b3bb85e7.js"></script></body>
 </html>
